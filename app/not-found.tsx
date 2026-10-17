@@ -1,18 +1,12 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import { MissingPage } from "@/components/missing-page";
+
+export const metadata: Metadata = {
+  title: "Page not found",
+  description: "That AppointHive page isn’t on the floor. Use the menu to get back home.",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
-  return (
-    <section className="legal">
-      <div className="shell">
-        <p className="kicker">
-          <i />
-          Missing page
-        </p>
-        <h1 className="display">That page isn’t on the floor.</h1>
-        <p>
-          <Link href="/">Back to AppointHive</Link>
-        </p>
-      </div>
-    </section>
-  );
+  return <MissingPage />;
 }

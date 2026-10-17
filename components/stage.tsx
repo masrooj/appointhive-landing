@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { faqJsonLd } from "@/lib/seo";
 import { ContactForm } from "./contact-form";
 import { ContactLink } from "./contact-link";
@@ -170,15 +169,6 @@ const faqs = [
   },
 ];
 
-const exploreLinks = [
-  { href: "/salon-booking-software", label: "Salon booking software" },
-  { href: "/barber-shop-software", label: "Barber shop software" },
-  { href: "/appointment-booking-software", label: "Appointment booking software" },
-  { href: "/features/online-booking", label: "Online booking" },
-  { href: "/features/live-queue", label: "Live queue" },
-  { href: "/features/salon-payroll", label: "Salon payroll" },
-];
-
 const frames = [
   { src: "/film/cut.jpg", alt: "A barber cutting a client’s hair beside a shop window", caption: "Mid-cut" },
   { src: "/film/floor.jpg", alt: "A real barbershop floor with chairs and someone waiting", caption: "The floor" },
@@ -218,6 +208,13 @@ export function Stage() {
           </p>
           <div className="hero-actions">
             <ContactLink />
+            <a className="btn btn-ghost" href="#tour">
+              <svg className="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                <path d="M10 9.2v5.6L15.2 12z" fill="currentColor" />
+              </svg>
+              Watch tour
+            </a>
           </div>
         </div>
         <figure className="stage-art">
@@ -364,22 +361,6 @@ export function Stage() {
         </div>
       </section>
 
-      <section className="shell explore" id="explore">
-        <p className="kicker">
-          <i />
-          Explore
-        </p>
-        <h2 className="display">Built for the search that brings you here.</h2>
-        <p className="lede">Salon booking, barber shop floors, and the pieces that run the visit.</p>
-        <ul className="explore-list">
-          {exploreLinks.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href}>{item.label}</Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
       <div className="reel" aria-hidden="true">
         <div className="reel-track">
           {loop.map((frame, index) => (
@@ -407,6 +388,29 @@ export function Stage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="shell tour" id="tour">
+        <p className="kicker">
+          <i />
+          Product tour
+        </p>
+        <h2 className="display">See AppointHive on the floor.</h2>
+        <p className="lede">
+          A short walk through booking, the live queue, and how a visit becomes pay.
+        </p>
+        <figure className="tour-frame">
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            poster="/tour/poster.jpg"
+            aria-label="AppointHive product tour"
+          >
+            <source src="/tour/product-tour.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </figure>
       </section>
 
       <section className="shell faq" id="faq">

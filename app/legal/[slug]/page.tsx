@@ -5,6 +5,8 @@ import { pageMetadata } from "@/lib/seo";
 
 const slugs = Object.keys(legalPages) as LegalSlug[];
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }

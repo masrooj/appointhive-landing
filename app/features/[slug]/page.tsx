@@ -4,6 +4,8 @@ import { IntentPageView } from "@/components/intent-page";
 import { featurePages, getFeaturePage } from "@/content/seo";
 import { pageMetadata } from "@/lib/seo";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return featurePages.map((page) => ({ slug: page.slug }));
 }
