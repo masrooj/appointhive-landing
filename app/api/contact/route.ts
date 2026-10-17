@@ -1,17 +1,16 @@
 import { NextResponse } from "next/server";
+import { csrfMatches } from "@/lib/csrf";
+import { siteOrigin } from "@/lib/links";
 import { sendContactMail, smtpReady } from "@/lib/smtp";
 
 const INTERESTS = new Set(["SAAS", "STANDALONE", "NOT_SURE"]);
+const WINDOW_MS = 60 * 60 * 1000;
+const PER_IP_LIMIT = 5;
+const GLOBAL_LIMIT = 80;
+const MAX_KEYS = 1000;
+const MAX_BODY = 16_384;
 
 const hits = new Map<string, number[]>();
-
-function limited(ip: string): boolean {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((stamp) => now - stamp < 60 * 60 * 1000);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > 8;
-}
 
 const interestLabel: Record<string, string> = {
   STANDALONE: "Standalone install",
@@ -19,47 +18,138 @@ const interestLabel: Record<string, string> = {
   NOT_SURE: "Not sure",
 };
 
-export async function POST(request: Request) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-  if (limited(ip)) {
-    return NextResponse.json({ error: "Too many notes. Email hello@appointhive.com." }, { status: 429 });
+function json(body: { ok?: true; error?: string }, status = 200) {
+  return NextResponse.json(body, {
+    status,
+    headers: { "Cache-Control": "no-store" },
+  });
+}
+
+function clientKey(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return (forwarded || "local").slice(0, 64);
+}
+
+function limited(ip: string): boolean {
+  const now = Date.now();
+  let total = 0;
+  for (const [key, stamps] of hits) {
+    const recent = stamps.filter((stamp) => now - stamp < WINDOW_MS);
+    if (recent.length === 0) {
+      hits.delete(key);
+      continue;
+    }
+    hits.set(key, recent);
+    total += recent.length;
   }
 
-  let body: Record<string, unknown>;
+  if (total >= GLOBAL_LIMIT) return true;
+
+  const recent = hits.get(ip) ?? [];
+  if (recent.length >= PER_IP_LIMIT) return true;
+
+  recent.push(now);
+  if (!hits.has(ip) && hits.size >= MAX_KEYS) {
+    const oldest = hits.keys().next().value;
+    if (oldest) hits.delete(oldest);
+  }
+  hits.set(ip, recent);
+  return false;
+}
+
+function sameSite(request: Request): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return false;
+  let sent: URL;
   try {
-    body = (await request.json()) as Record<string, unknown>;
+    sent = new URL(origin);
   } catch {
-    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+    return false;
+  }
+  const host = request.headers.get("host");
+  if (host && sent.host === host) return true;
+  try {
+    return sent.origin === new URL(siteOrigin()).origin;
+  } catch {
+    return false;
+  }
+}
+
+function field(value: unknown, max: number, multiline = false): string | null {
+  if (typeof value !== "string") return null;
+  const cleaned = (
+    multiline ? value.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "") : value.replace(/[\u0000-\u001F\u007F]/g, "")
+  ).trim();
+  if (!cleaned || cleaned.length > max) return null;
+  return cleaned;
+}
+
+export async function POST(request: Request) {
+  const contentType = request.headers.get("content-type")?.toLowerCase() ?? "";
+  if (contentType.includes("multipart/form-data")) {
+    return json({ error: "Uploads are not accepted." }, 415);
+  }
+  if (!contentType.includes("application/json")) {
+    return json({ error: "Invalid request." }, 415);
   }
 
-  if (typeof body.companyWebsite === "string" && body.companyWebsite.trim()) {
-    return NextResponse.json({ ok: true });
+  const declared = Number(request.headers.get("content-length") ?? "0");
+  if (Number.isFinite(declared) && declared > MAX_BODY) {
+    return json({ error: "Invalid request." }, 413);
+  }
+  if (!sameSite(request)) {
+    return json({ error: "Invalid request." }, 403);
+  }
+  if (!csrfMatches(request)) {
+    return json({ error: "Invalid request." }, 403);
+  }
+  if (limited(clientKey(request))) {
+    return json({ error: "Too many notes. Email hello@appointhive.com." }, 429);
   }
 
-  const name = typeof body.name === "string" ? body.name.trim() : "";
-  const business = typeof body.business === "string" ? body.business.trim() : "";
-  const email = typeof body.email === "string" ? body.email.trim() : "";
-  const message = typeof body.message === "string" ? body.message.trim() : "";
-  const productInterest = typeof body.productInterest === "string" ? body.productInterest.trim().toUpperCase() : "";
+  let raw: string;
+  try {
+    raw = await request.text();
+  } catch {
+    return json({ error: "Invalid request." }, 400);
+  }
+  if (raw.length > MAX_BODY) {
+    return json({ error: "Invalid request." }, 413);
+  }
+
+  let body: unknown;
+  try {
+    body = JSON.parse(raw);
+  } catch {
+    return json({ error: "Invalid request." }, 400);
+  }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return json({ error: "Invalid request." }, 400);
+  }
+
+  const record = body as Record<string, unknown>;
+  if (typeof record.companyWebsite === "string" && record.companyWebsite.trim()) {
+    return json({ ok: true });
+  }
+
+  const name = field(record.name, 200);
+  const business = field(record.business, 200);
+  const email = field(record.email, 200);
+  const message = field(record.message, 5000, true);
+  const productInterest = field(record.productInterest, 20)?.toUpperCase() ?? "";
 
   if (!name || !business || !email || !message || !INTERESTS.has(productInterest)) {
-    return NextResponse.json({ error: "Please fill in the shop, your name, email, and a note." }, { status: 400 });
+    return json({ error: "Please fill in the shop, your name, email, and a note." }, 400);
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
+    return json({ error: "Please enter a valid email address." }, 400);
   }
-  if (body.consent !== true) {
-    return NextResponse.json({ error: "Please accept the privacy note." }, { status: 400 });
-  }
-  if (name.length > 200 || business.length > 200 || message.length > 5000) {
-    return NextResponse.json({ error: "One of the fields is too long." }, { status: 400 });
+  if (record.consent !== true) {
+    return json({ error: "Please accept the privacy note." }, 400);
   }
 
   if (!smtpReady()) {
-    return NextResponse.json(
-      { error: "Mail is not configured yet. Email hello@appointhive.com directly." },
-      { status: 503 },
-    );
+    return json({ error: "Mail is not configured yet. Email hello@appointhive.com directly." }, 503);
   }
 
   try {
@@ -71,11 +161,8 @@ export async function POST(request: Request) {
       message,
     });
   } catch {
-    return NextResponse.json(
-      { error: "The note did not send. Email hello@appointhive.com directly." },
-      { status: 502 },
-    );
+    return json({ error: "The note did not send. Email hello@appointhive.com directly." }, 502);
   }
 
-  return NextResponse.json({ ok: true });
+  return json({ ok: true });
 }

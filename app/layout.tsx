@@ -1,45 +1,32 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Calistoga, Inter } from "next/font/google";
 import { CookieNotice } from "@/components/cookie-notice";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { siteOrigin } from "@/lib/links";
+import { JsonLd } from "@/components/json-ld";
+import {
+  homeMetadata,
+  organizationJsonLd,
+  softwareApplicationJsonLd,
+  websiteJsonLd,
+} from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const calistoga = Calistoga({ weight: "400", subsets: ["latin"], variable: "--font-calistoga" });
 
-const title = "AppointHive — booking, staff floor ops, and revenue for salons";
-const description =
-  "AppointHive installs booking, the live floor, and staff pay for one salon. Write to hello@appointhive.com.";
+export const metadata: Metadata = homeMetadata();
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteOrigin()),
-  title: {
-    default: title,
-    template: "%s · AppointHive",
-  },
-  description,
-  applicationName: "AppointHive",
-  keywords: [
-    "salon booking software",
-    "barber shop appointment system",
-    "salon queue management",
-    "salon payroll software",
-    "multi-location salon booking",
-  ],
-  openGraph: {
-    title,
-    description,
-    siteName: "AppointHive",
-    type: "website",
-  },
-};
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${calistoga.variable}`}>
-      <body>
+      <body data-nonce={nonce}>
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
+        <JsonLd data={softwareApplicationJsonLd()} />
         <a className="skip" href="#main">
           Skip to content
         </a>

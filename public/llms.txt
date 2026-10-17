@@ -1,0 +1,38 @@
+# AppointHive
+
+> Booking, the live floor, and staff pay for barber shops and salons.
+
+AppointHive is salon and barber shop software. Clients book online without creating an account. The shop runs one live queue for bookings and walk-ins. Commission and payslip PDFs come from the same visit record. Available as Hosted SaaS or a Standalone single-business license on infrastructure you control.
+
+## Primary pages
+
+- Home: https://appointhive.com/
+- Salon booking software: https://appointhive.com/salon-booking-software
+- Barber shop software: https://appointhive.com/barber-shop-software
+- Appointment booking software: https://appointhive.com/appointment-booking-software
+
+## Features
+
+- Online booking: https://appointhive.com/features/online-booking
+- Live queue: https://appointhive.com/features/live-queue
+- Salon payroll: https://appointhive.com/features/salon-payroll
+
+## Contact
+
+- Email: hello@appointhive.com
+- Contact form: https://appointhive.com/#contact
+- Instagram: https://www.instagram.com/appointhive/
+
+## Product facts
+
+- Customers never create a login
+- Multi-location booking supported
+- Floor languages: English, Spanish, French
+- Hosted: cloud subscription with trial
+- Standalone: single-business license, does not phone home for license checks
+- WhatsApp messaging only after a Meta-approved number
+
+## Optional
+
+- Full product overview: https://appointhive.com/#product
+- Legal: https://appointhive.com/legal/privacy

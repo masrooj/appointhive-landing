@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { legalPages, type LegalSlug } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 
 const slugs = Object.keys(legalPages) as LegalSlug[];
 
@@ -16,7 +17,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const page = legalPages[slug as LegalSlug];
   if (!page) return {};
-  return { title: page.title, description: page.lede };
+  return pageMetadata({
+    title: page.title,
+    description: page.lede,
+    path: `/legal/${slug}`,
+  });
 }
 
 export default async function LegalPage({ params }: { params: Promise<{ slug: string }> }) {

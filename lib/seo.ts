@@ -1,0 +1,199 @@
+import type { Metadata } from "next";
+import { brandDescription, defaultKeywords, type FaqItem, type IntentPage } from "@/content/seo";
+import { siteOrigin } from "@/lib/links";
+
+const SITE_NAME = "AppointHive";
+const DEFAULT_TITLE = "AppointHive — booking and staff pay for barber shops and salons";
+const OG_IMAGE = "/film/hero-devices.jpg";
+
+export function pageMetadata(input: {
+  title: string;
+  description: string;
+  path: string;
+  keywords?: string[];
+  image?: string;
+  noIndex?: boolean;
+}): Metadata {
+  const origin = siteOrigin();
+  const url = `${origin}${input.path === "/" ? "" : input.path}`;
+  const image = input.image ?? OG_IMAGE;
+  const absoluteImage = image.startsWith("http") ? image : `${origin}${image}`;
+
+  return {
+    title: input.title,
+    description: input.description,
+    keywords: input.keywords ?? defaultKeywords,
+    alternates: { canonical: url },
+    robots: input.noIndex ? { index: false, follow: false } : { index: true, follow: true },
+    openGraph: {
+      title: input.title,
+      description: input.description,
+      url,
+      siteName: SITE_NAME,
+      type: "website",
+      locale: "en_US",
+      images: [{ url: absoluteImage, width: 1200, height: 630, alt: input.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: input.title,
+      description: input.description,
+      images: [absoluteImage],
+    },
+  };
+}
+
+export function homeMetadata(): Metadata {
+  return {
+    metadataBase: new URL(siteOrigin()),
+    title: {
+      default: DEFAULT_TITLE,
+      template: `%s · ${SITE_NAME}`,
+    },
+    description: brandDescription,
+    applicationName: SITE_NAME,
+    keywords: defaultKeywords,
+    authors: [{ name: SITE_NAME, url: siteOrigin() }],
+    creator: SITE_NAME,
+    publisher: SITE_NAME,
+    category: "business software",
+    alternates: { canonical: siteOrigin() },
+    robots: { index: true, follow: true },
+    openGraph: {
+      title: DEFAULT_TITLE,
+      description: brandDescription,
+      url: siteOrigin(),
+      siteName: SITE_NAME,
+      type: "website",
+      locale: "en_US",
+      images: [
+        {
+          url: `${siteOrigin()}${OG_IMAGE}`,
+          width: 1200,
+          height: 630,
+          alt: "AppointHive booking and dashboard on laptop and phone in a barbershop",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: DEFAULT_TITLE,
+      description: brandDescription,
+      images: [`${siteOrigin()}${OG_IMAGE}`],
+    },
+  };
+}
+
+export function organizationJsonLd() {
+  const origin = siteOrigin();
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: origin,
+    logo: `${origin}/brand/logo.png`,
+    email: "hello@appointhive.com",
+    sameAs: ["https://www.instagram.com/appointhive/"],
+    description: brandDescription,
+  };
+}
+
+export function websiteJsonLd() {
+  const origin = siteOrigin();
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: origin,
+    description: brandDescription,
+    publisher: { "@type": "Organization", name: SITE_NAME, url: origin },
+    inLanguage: "en",
+  };
+}
+
+export function softwareApplicationJsonLd() {
+  const origin = siteOrigin();
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: SITE_NAME,
+    applicationCategory: "BusinessApplication",
+    applicationSubCategory: "Appointment scheduling software",
+    operatingSystem: "Web",
+    url: origin,
+    description: brandDescription,
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Hosted SaaS",
+        description: "Cloud workspace we host. Monthly or annual subscription with trial.",
+        url: `${origin}/#ways`,
+        priceCurrency: "USD",
+        availability: "https://schema.org/OnlineOnly",
+      },
+      {
+        "@type": "Offer",
+        name: "Standalone license",
+        description: "Single-business license on infrastructure you control.",
+        url: `${origin}/#ways`,
+        priceCurrency: "USD",
+        availability: "https://schema.org/OnlineOnly",
+      },
+    ],
+    featureList: [
+      "Online booking and website embed",
+      "Live floor queue and walk-ins",
+      "Multi-location salon booking",
+      "Email confirmations and reminders",
+      "Staff payroll and commission",
+      "Reports and CSV export",
+    ],
+    audience: {
+      "@type": "Audience",
+      audienceType: "Barber shops and salons",
+    },
+  };
+}
+
+export function faqJsonLd(faqs: FaqItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+}
+
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
+  const origin = siteOrigin();
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${origin}${item.path === "/" ? "" : item.path}`,
+    })),
+  };
+}
+
+export function webPageJsonLd(page: IntentPage) {
+  const origin = siteOrigin();
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: page.title,
+    description: page.description,
+    url: `${origin}${page.path}`,
+    isPartOf: { "@type": "WebSite", name: SITE_NAME, url: origin },
+    about: { "@type": "SoftwareApplication", name: SITE_NAME },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: `${origin}${page.image.src}`,
+    },
+  };
+}

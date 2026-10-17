@@ -1,0 +1,5 @@
+Contact: mailto:hello@appointhive.com
+Preferred-Languages: en
+Canonical: https://appointhive.com/.well-known/security.txt
+Policy: https://appointhive.com/legal/privacy
+Expires: 2027-12-31T23:59:59.000Z

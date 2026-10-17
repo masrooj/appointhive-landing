@@ -2,8 +2,21 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { csrfCookieName, csrfHeaderName } from "@/lib/csrf";
 
 type Interest = "STANDALONE" | "SAAS" | "NOT_SURE";
+
+function readCsrfCookie(): string {
+  if (typeof document === "undefined") return "";
+  const parts = document.cookie.split(";");
+  for (const part of parts) {
+    const [name, ...rest] = part.trim().split("=");
+    if (name === csrfCookieName) {
+      return decodeURIComponent(rest.join("=")).trim();
+    }
+  }
+  return "";
+}
 
 export function ContactForm() {
   const [interest, setInterest] = useState<Interest>("STANDALONE");
@@ -26,15 +39,19 @@ export function ContactForm() {
     };
 
     try {
+      const csrf = readCsrfCookie();
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(csrf ? { [csrfHeaderName]: csrf } : {}),
+        },
         body: JSON.stringify(payload),
       });
-      const body = (await response.json()) as { error?: string };
+      const body = (await response.json()) as { error?: unknown };
       if (!response.ok) {
         setStatus("error");
-        setError(body.error ?? "The note did not send. Email hello@appointhive.com.");
+        setError(typeof body.error === "string" ? body.error : "The note did not send. Email hello@appointhive.com.");
         return;
       }
       setStatus("sent");
@@ -56,7 +73,7 @@ export function ContactForm() {
   }
 
   return (
-    <form className="form" onSubmit={onSubmit}>
+    <form className="form" action="/api/contact" method="post" onSubmit={onSubmit}>
       <label>
         <span>Interest</span>
         <select name="productInterest" value={interest} onChange={(event) => setInterest(event.target.value as Interest)}>
@@ -95,6 +112,12 @@ export function ContactForm() {
       </label>
       {error ? <p className="form-error">{error}</p> : null}
       <button className="btn btn-lime" type="submit" disabled={status === "sending"}>
+        {status === "sending" ? null : (
+          <svg className="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8" />
+            <path d="m4.5 7 7.5 6 7.5-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        )}
         {status === "sending" ? "Sending…" : "Contact us"}
       </button>
     </form>

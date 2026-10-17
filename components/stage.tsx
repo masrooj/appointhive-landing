@@ -1,7 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
-import { InstagramButton } from "./instagram-button";
 import { ContactForm } from "./contact-form";
+import { ContactLink } from "./contact-link";
+import { InstagramButton } from "./instagram-button";
+import { ServiceGlyph } from "./service-glyph";
+
+const iconTones = ["gold", "teal", "lime"] as const;
 
 const pains = [
   {
@@ -54,7 +57,7 @@ const features = [
       "Online booking and an embed for your site",
       "More than one location",
       "Assign the chair: least busy, round robin, highest rated, or by hand",
-      "Eight visit statuses, from booked through done",
+      "Visit statuses, from booked through done",
       "Email confirmation and reminders",
       "Your branding and a business page you can edit",
     ],
@@ -100,6 +103,70 @@ const features = [
   },
 ];
 
+const services = [
+  { icon: "calendar", label: "Online booking" },
+  { icon: "embed", label: "Embed for your website" },
+  { icon: "pins", label: "More than one location" },
+  { icon: "chair", label: "Smart chair assignment" },
+  { icon: "queue", label: "Live queue" },
+  { icon: "walk", label: "Walk-ins" },
+  { icon: "key", label: "Staff PIN and magic link" },
+  { icon: "timesheet", label: "Leave and timesheets" },
+  { icon: "history", label: "Customer history" },
+  { icon: "mail", label: "Email confirmations and reminders" },
+  { icon: "wait", label: "Waitlist" },
+  { icon: "star", label: "Reviews and return nudges" },
+  { icon: "chart", label: "Reports and CSV" },
+  { icon: "payslip", label: "Payroll and payslip PDF" },
+  { icon: "percent", label: "Commission" },
+  { icon: "invoice", label: "Service invoices" },
+  { icon: "chat", label: "WhatsApp after Meta approval" },
+];
+
+const visitRecord = [
+  { icon: "calendar", label: "Booking", text: "The time is taken." },
+  { icon: "staff", label: "Staff", text: "The chair is named." },
+  { icon: "history", label: "Client history", text: "The visit stays." },
+  { icon: "mail", label: "Email", text: "They get the note." },
+  { icon: "chart", label: "Reports", text: "The day is counted." },
+  { icon: "payslip", label: "Payroll", text: "Pay comes from it." },
+];
+
+const faqs = [
+  {
+    q: "Who is AppointHive for?",
+    a: "A smart way out of the booking mess in a barber shop or salon. The phone during a cut, the argument over who’s next, and the Sunday calculator come off the floor.",
+  },
+  {
+    q: "Do clients need an account?",
+    a: "No. A client picks a time and gets the email. They never create a login.",
+  },
+  {
+    q: "What is the difference between Standalone and Hosted?",
+    a: "The product is the same. Hosting is the only split. Standalone is one shop on servers you control, sold as a license or a quote. Hosted is the cloud we run, monthly or annual, with a 7-day trial. Cancel when you want. No card is taken when self-serve signup is open.",
+  },
+  {
+    q: "What does one visit carry?",
+    a: "The booking, the staff member, the client history, the email, the reports, and the payroll. Those read the same visit. Nothing is copied into a second book.",
+  },
+  {
+    q: "How does the floor staff get in?",
+    a: "By PIN or magic link. There is no password for the chair to remember.",
+  },
+  {
+    q: "Does WhatsApp send with the email?",
+    a: "Email always sends. WhatsApp sends only after a Meta-approved number is in place.",
+  },
+  {
+    q: "What is a service invoice?",
+    a: "The client’s bill for the visit. It is not a charge for using AppointHive.",
+  },
+  {
+    q: "How do we start?",
+    a: "Write to hello@appointhive.com and say how many chairs you run, and whether the software should live on your servers or on ours. A note starts a conversation. It does not buy a license or open a subscription.",
+  },
+];
+
 const frames = [
   { src: "/film/cut.jpg", alt: "A barber cutting a client’s hair beside a shop window", caption: "Mid-cut" },
   { src: "/film/floor.jpg", alt: "A real barbershop floor with chairs and someone waiting", caption: "The floor" },
@@ -122,29 +189,36 @@ export function Stage() {
         />
         <div className="hero-veil" aria-hidden="true" />
         <div className="shell stage">
-          <div>
-            <p className="kicker">
-              <i />
+        <div>
+          <p className="kicker">
+            <i />
               Appointment operations
-            </p>
-            <h1 className="display">
-              Schedule smarter.
-              <span>Operate better.</span>
-            </h1>
-            <p className="lede">
+          </p>
+          <h1 className="display">
+            Schedule smarter.
+            <span>Operate better.</span>
+          </h1>
+          <p className="lede">
               Run your chair, not your inbox. Booking, the live floor, and staff pay in one product.
-            </p>
-            <div className="hero-actions">
-              <Link className="btn btn-lime" href="/#contact">
-                Contact us
-              </Link>
-              <InstagramButton />
-            </div>
+          </p>
+          <div className="hero-actions">
+            <ContactLink />
           </div>
+        </div>
+        <figure className="stage-art">
+          <Image
+            className="hero-shot"
+            src="/film/hero-devices.jpg"
+            alt="A laptop on a barber counter showing the Elite Cuts dashboard, with the booking page open on a phone beside it"
+            width={864}
+            height={1152}
+            priority
+          />
+        </figure>
         </div>
       </section>
 
-      <section className="shell story">
+      <section className="shell story" id="floor">
         <p className="kicker">
           <i />
           The floor today
@@ -163,7 +237,7 @@ export function Stage() {
         </div>
       </section>
 
-      <section className="shell story">
+      <section className="shell story" id="solution">
         <p className="kicker">
           <i />
           What AppointHive does
@@ -180,10 +254,30 @@ export function Stage() {
             </article>
           ))}
         </div>
-        <p className="flow-line">One visit record: Booking → Staff → Client history → Email → Reports → Payroll</p>
+        <div className="visit-record">
+          <div className="visit-record-head">
+            <p className="kicker">
+              <i />
+              One visit record
+            </p>
+            <p>Booking, the floor, the email, and the payslip read the same visit.</p>
+          </div>
+          <ol className="visit-steps">
+            {visitRecord.map((step, index) => (
+              <li key={step.label}>
+                <span className="visit-index">{String(index + 1).padStart(2, "0")}</span>
+                <span className={`service-mark tone-${iconTones[index % iconTones.length]}`}>
+                  <ServiceGlyph name={step.icon} />
+                </span>
+                <strong>{step.label}</strong>
+                <span className="visit-detail">{step.text}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
 
-      <section className="shell ways">
+      <section className="shell ways" id="ways">
         <p className="kicker">
           <i />
           Two ways to run it
@@ -195,10 +289,10 @@ export function Stage() {
         <div className="ways-grid">
           <article>
             <Image
-              src="/product/standalone.jpg"
-              alt="Standalone owner dashboard for one salon"
-              width={1280}
-              height={1100}
+              src="/film/way-standalone.jpg"
+              alt="A shop owner beside the computer and server in his own back room"
+              width={1600}
+              height={900}
             />
             <div>
             <p className="face">Standalone</p>
@@ -213,10 +307,10 @@ export function Stage() {
           </article>
           <article>
             <Image
-              src="/product/hosted.jpg"
-              alt="Hosted booking page running for Elite Cuts"
-              width={1280}
-              height={1100}
+              src="/film/way-hosted.jpg"
+              alt="A shop floor running with a phone in hand and no server in the room"
+              width={1600}
+              height={900}
             />
             <div>
             <p className="face">Hosted</p>
@@ -232,7 +326,7 @@ export function Stage() {
         </div>
       </section>
 
-      <section className="shell features">
+      <section className="shell features" id="product">
         <p className="kicker">
           <i />
           The whole product
@@ -266,6 +360,40 @@ export function Stage() {
         </div>
       </div>
 
+      <section className="shell services" id="services">
+        <p className="kicker">
+          <i />
+          Through AppointHive
+        </p>
+        <h2 className="display">The services on the floor.</h2>
+        <ul className="service-list">
+          {services.map((service, index) => (
+            <li key={service.label}>
+              <span className={`service-mark tone-${iconTones[index % iconTones.length]}`}>
+                <ServiceGlyph name={service.icon} />
+              </span>
+              {service.label}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="shell faq" id="faq">
+        <p className="kicker">
+          <i />
+          FAQ
+        </p>
+        <h2 className="display">Questions from the floor.</h2>
+        <div className="faq-list">
+          {faqs.map((item) => (
+            <details key={item.q} className="faq-item">
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
       <section className="shell contact-band" id="contact">
         <div className="contact-grid">
           <div>
@@ -274,6 +402,14 @@ export function Stage() {
               Write to the shop desk
             </p>
             <h2 className="display">Tell us about the chairs.</h2>
+            <p className="contact-note">
+              Name the shop, how many chairs you run, and whether AppointHive should live on your servers or on the cloud we run. We answer by email. A note here starts a conversation. It does not buy a license or open a subscription.
+            </p>
+            <ul className="contact-facts">
+              <li>Standalone is one business, on machines you control.</li>
+              <li>Hosted is the same product. We run the servers.</li>
+              <li>Leave client lists and card numbers out of the message.</li>
+            </ul>
             <div className="reach">
               <a href="mailto:hello@appointhive.com">hello@appointhive.com</a>
               <InstagramButton />

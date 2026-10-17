@@ -129,6 +129,6 @@ export const legalNav: { href: string; label: string }[] = [
   { href: "/legal/privacy", label: "Privacy" },
   { href: "/legal/cookies", label: "Cookies" },
   { href: "/legal/license", label: "License" },
-  { href: "/legal/dpa", label: "DPA" },
+  { href: "/legal/dpa", label: "Data processing" },
   { href: "/legal/subprocessors", label: "Subprocessors" },
 ];
