@@ -1,7 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
+import { faqJsonLd } from "@/lib/seo";
 import { ContactForm } from "./contact-form";
 import { ContactLink } from "./contact-link";
 import { InstagramButton } from "./instagram-button";
+import { JsonLd } from "./json-ld";
 import { ServiceGlyph } from "./service-glyph";
 
 const iconTones = ["gold", "teal", "lime"] as const;
@@ -167,6 +170,15 @@ const faqs = [
   },
 ];
 
+const exploreLinks = [
+  { href: "/salon-booking-software", label: "Salon booking software" },
+  { href: "/barber-shop-software", label: "Barber shop software" },
+  { href: "/appointment-booking-software", label: "Appointment booking software" },
+  { href: "/features/online-booking", label: "Online booking" },
+  { href: "/features/live-queue", label: "Live queue" },
+  { href: "/features/salon-payroll", label: "Salon payroll" },
+];
+
 const frames = [
   { src: "/film/cut.jpg", alt: "A barber cutting a client’s hair beside a shop window", caption: "Mid-cut" },
   { src: "/film/floor.jpg", alt: "A real barbershop floor with chairs and someone waiting", caption: "The floor" },
@@ -178,6 +190,9 @@ export function Stage() {
 
   return (
     <>
+      <JsonLd
+        data={faqJsonLd(faqs.map((item) => ({ question: item.q, answer: item.a })))}
+      />
       <section className="hero">
         <Image
           className="hero-bg"
@@ -347,6 +362,22 @@ export function Stage() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="shell explore" id="explore">
+        <p className="kicker">
+          <i />
+          Explore
+        </p>
+        <h2 className="display">Built for the search that brings you here.</h2>
+        <p className="lede">Salon booking, barber shop floors, and the pieces that run the visit.</p>
+        <ul className="explore-list">
+          {exploreLinks.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href}>{item.label}</Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <div className="reel" aria-hidden="true">

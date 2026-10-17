@@ -1,7 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /api/
-Disallow: /api
-
-Host: https://appointhive.com
-Sitemap: https://appointhive.com/sitemap.xml

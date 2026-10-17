@@ -551,7 +551,7 @@ textarea { min-height: 120px; resize: vertical; }
 
 .footer-cols {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem 2rem;
   padding: 1.45rem 0 1.15rem;
 }
@@ -1053,6 +1053,38 @@ textarea { min-height: 120px; resize: vertical; }
 
 .btn-ink { color: var(--paper); background: var(--ink); }
 
+.explore { padding: 0.6rem 0 2.8rem; }
+
+.explore h2 {
+  margin: 0.55rem 0 0;
+  max-width: 16ch;
+  color: white;
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
+}
+
+.explore .lede {
+  margin: 0.85rem 0 0;
+  max-width: 42ch;
+  color: var(--mist-dim);
+}
+
+.explore-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem 1.25rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.explore-list a {
+  color: var(--teal);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.explore-list a:hover { text-decoration: underline; }
+
 .faq { padding: 0.4rem 0 2.6rem; }
 
 .faq h2 {
@@ -1109,7 +1141,7 @@ textarea { min-height: 120px; resize: vertical; }
   color: var(--mist-dim);
 }
 
-#floor, #solution, #ways, #product, #services, #faq, #contact {
+#floor, #solution, #ways, #product, #explore, #services, #faq, #contact {
   scroll-margin-top: calc(var(--header) + 12px);
 }
 
@@ -1135,7 +1167,7 @@ textarea { min-height: 120px; resize: vertical; }
 }
 
 @media (max-width: 860px) {
-  .stage, .contact-grid, .form-row, .footer-cols, .pains, .product-grid, .ways-grid, .shot-grid, .feature-grid { grid-template-columns: 1fr; }
+  .stage, .contact-grid, .form-row, .footer-cols, .explore-list, .pains, .product-grid, .ways-grid, .shot-grid, .feature-grid { grid-template-columns: 1fr; }
   .service-list { grid-template-columns: 1fr 1fr; }
   .footer-top, .footer-base { flex-direction: column; align-items: flex-start; }
   .hero { min-height: 640px; }

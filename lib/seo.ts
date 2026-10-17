@@ -4,7 +4,9 @@ import { siteOrigin } from "@/lib/links";
 
 const SITE_NAME = "AppointHive";
 const DEFAULT_TITLE = "AppointHive — booking and staff pay for barber shops and salons";
-const OG_IMAGE = "/film/hero-devices.jpg";
+const OG_IMAGE = "/og/default.jpg";
+const OG_WIDTH = 1200;
+const OG_HEIGHT = 630;
 
 export function pageMetadata(input: {
   title: string;
@@ -32,7 +34,7 @@ export function pageMetadata(input: {
       siteName: SITE_NAME,
       type: "website",
       locale: "en_US",
-      images: [{ url: absoluteImage, width: 1200, height: 630, alt: input.title }],
+      images: [{ url: absoluteImage, width: OG_WIDTH, height: OG_HEIGHT, alt: input.title }],
     },
     twitter: {
       card: "summary_large_image",
@@ -69,9 +71,9 @@ export function homeMetadata(): Metadata {
       images: [
         {
           url: `${siteOrigin()}${OG_IMAGE}`,
-          width: 1200,
-          height: 630,
-          alt: "AppointHive booking and dashboard on laptop and phone in a barbershop",
+          width: OG_WIDTH,
+          height: OG_HEIGHT,
+          alt: "A real barbershop floor with chairs — AppointHive for booking, queue, and pay",
         },
       ],
     },

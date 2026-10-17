@@ -101,6 +101,15 @@ const productLinks = [
   { href: "/#faq", label: "FAQ", icon: "faq" },
 ];
 
+const exploreLinks = [
+  { href: "/salon-booking-software", label: "Salon booking software", icon: "solutions" },
+  { href: "/barber-shop-software", label: "Barber shop software", icon: "services" },
+  { href: "/appointment-booking-software", label: "Appointment booking", icon: "features" },
+  { href: "/features/online-booking", label: "Online booking", icon: "contact" },
+  { href: "/features/live-queue", label: "Live queue", icon: "faq" },
+  { href: "/features/salon-payroll", label: "Salon payroll", icon: "data" },
+];
+
 const companyLinks = [
   { href: "/#contact", label: "Contact", icon: "contact" },
   { href: "mailto:hello@appointhive.com", label: "hello@appointhive.com", icon: "mail" },
@@ -136,6 +145,15 @@ export function Footer() {
                 <FooterIcon name={item.icon} />
                 {item.label}
               </a>
+            ))}
+          </nav>
+          <nav aria-label="Explore">
+            <p>Explore</p>
+            {exploreLinks.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <FooterIcon name={item.icon} />
+                {item.label}
+              </Link>
             ))}
           </nav>
           <nav aria-label="Company">

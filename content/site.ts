@@ -36,7 +36,7 @@ export const legalPages: Record<
       {
         heading: "Inquiries",
         body: [
-          "The contact form collects your name, business, email, message, product interest, and an optional plan or edition. We use that to reply. Do not send client lists or payment card numbers through the form.",
+          "The contact form collects your name, shop name, email, message, and product interest (Standalone, Hosted, or not sure). We use that to reply. Do not send client lists or payment card numbers through the form.",
         ],
       },
       {
