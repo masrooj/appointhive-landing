@@ -17,7 +17,7 @@ export function CookieNotice() {
   return (
     <aside className="cookie" role="dialog" aria-label="Cookie notice">
       <p>
-        This marketing site does not set advertising cookies. A dismissal stays in this browser.{" "}
+        No advertising cookies. A first-party cookie protects the contact form. A dismissal stays in this browser.{" "}
         <Link href="/legal/cookies">Cookie details</Link>
       </p>
       <button

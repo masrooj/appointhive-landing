@@ -73,53 +73,61 @@ export function ContactForm() {
   }
 
   return (
-    <form className="form" action="/api/contact" method="post" onSubmit={onSubmit}>
-      <label>
-        <span>Interest</span>
-        <select name="productInterest" value={interest} onChange={(event) => setInterest(event.target.value as Interest)}>
-          <option value="STANDALONE">Standalone install</option>
-          <option value="SAAS">Hosted</option>
-          <option value="NOT_SURE">Not sure</option>
-        </select>
-      </label>
-      <div className="form-row">
+    <>
+      <noscript>
+        <p className="form-error">
+          JavaScript is needed for this form. Email{" "}
+          <a href="mailto:hello@appointhive.com">hello@appointhive.com</a> instead.
+        </p>
+      </noscript>
+      <form className="form" onSubmit={onSubmit}>
         <label>
-          <span>Name</span>
-          <input name="name" autoComplete="name" required maxLength={200} />
+          <span>Interest</span>
+          <select name="productInterest" value={interest} onChange={(event) => setInterest(event.target.value as Interest)}>
+            <option value="STANDALONE">Standalone install</option>
+            <option value="SAAS">Hosted</option>
+            <option value="NOT_SURE">Not sure</option>
+          </select>
+        </label>
+        <div className="form-row">
+          <label>
+            <span>Name</span>
+            <input name="name" autoComplete="name" required maxLength={200} />
+          </label>
+          <label>
+            <span>Shop</span>
+            <input name="business" autoComplete="organization" required maxLength={200} />
+          </label>
+        </div>
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" autoComplete="email" required maxLength={200} />
         </label>
         <label>
-          <span>Shop</span>
-          <input name="business" autoComplete="organization" required maxLength={200} />
+          <span>Message</span>
+          <textarea name="message" required maxLength={5000} placeholder="How many chairs, and do you want to host it?" />
         </label>
-      </div>
-      <label>
-        <span>Email</span>
-        <input name="email" type="email" autoComplete="email" required maxLength={200} />
-      </label>
-      <label>
-        <span>Message</span>
-        <textarea name="message" required maxLength={5000} placeholder="How many chairs, and do you want to host it?" />
-      </label>
-      <label className="hp" aria-hidden="true">
-        Website
-        <input name="companyWebsite" tabIndex={-1} autoComplete="off" />
-      </label>
-      <label className="consent">
-        <input name="consent" type="checkbox" required />
-        <span>
-          I agree to be contacted, and I’ve read the <Link href="/legal/privacy">privacy note</Link>.
-        </span>
-      </label>
-      {error ? <p className="form-error">{error}</p> : null}
-      <button className="btn btn-lime" type="submit" disabled={status === "sending"}>
-        {status === "sending" ? null : (
-          <svg className="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8" />
-            <path d="m4.5 7 7.5 6 7.5-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        )}
-        {status === "sending" ? "Sending…" : "Contact us"}
-      </button>
-    </form>
+        <label className="hp" aria-hidden="true">
+          Website
+          <input name="companyWebsite" tabIndex={-1} autoComplete="off" />
+        </label>
+        <label className="consent">
+          <input name="consent" type="checkbox" required />
+          <span>
+            I agree to be contacted, and I’ve read the <Link href="/legal/privacy">privacy note</Link>.
+          </span>
+        </label>
+        {error ? <p className="form-error">{error}</p> : null}
+        <button className="btn btn-lime" type="submit" disabled={status === "sending"}>
+          {status === "sending" ? null : (
+            <svg className="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8" />
+              <path d="m4.5 7 7.5 6 7.5-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          )}
+          {status === "sending" ? "Sending…" : "Contact us"}
+        </button>
+      </form>
+    </>
   );
 }

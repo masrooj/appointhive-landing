@@ -24,7 +24,7 @@ export const legalPages: Record<
       {
         heading: "This website",
         body: [
-          "Prices shown here are illustrative until the live catalog responds. Submitting the contact form is a request for a demo or a conversation, not a completed purchase.",
+          "Submitting the contact form is a request for a demo or a conversation, not a completed purchase. Commercial terms for Hosted or Standalone are set in the agreement you receive, not on this marketing site.",
         ],
       },
     ],
@@ -55,12 +55,13 @@ export const legalPages: Record<
   },
   cookies: {
     title: "Cookies",
-    lede: "This marketing site does not run advertising cookies.",
+    lede: "This marketing site does not run advertising cookies. It does use one first-party functional cookie.",
     sections: [
       {
         heading: "What we store",
         body: [
-          "Dismissing the notice saves a preference in local storage on your browser. That is not sent to a third-party ad network.",
+          "A first-party cookie named ah_csrf protects the contact form from cross-site requests. It is set by this site, not by an ad network, and it is not used for advertising.",
+          "Dismissing the cookie notice saves a preference in local storage on your browser. That preference is not sent to a third-party ad network.",
           "The hosted product and a Standalone install have their own cookie notices. Those apply when you use the product, not this page.",
         ],
       },

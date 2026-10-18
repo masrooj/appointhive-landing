@@ -22,8 +22,10 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
               <div className="nav-panel">
                 <a href="/">Home</a>
                 <a href="/#solution">Solutions</a>
+                <a href="/#tour">Tour</a>
                 <a href="/#ways">Hosting</a>
                 <a href="/#product">Features</a>
+                <a href="/#services">Services</a>
                 <a href="/#contact">Contact</a>
               </div>
             </nav>

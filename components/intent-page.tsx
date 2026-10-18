@@ -78,6 +78,21 @@ export function IntentPageView({ page, crumbs }: Props) {
           </div>
         </section>
 
+        {page.related.length > 0 ? (
+          <section className="intent-related" aria-labelledby="related-heading">
+            <h2 className="display" id="related-heading">
+              Related
+            </h2>
+            <ul>
+              {page.related.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href}>{item.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
         <section className="intent-cta">
           <h2 className="display">Tell us about the chairs.</h2>
           <p>Name the shop and whether AppointHive should live on your servers or on the cloud we run.</p>
