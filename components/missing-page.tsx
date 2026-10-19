@@ -5,7 +5,7 @@ const menu = [
   { href: "/", label: "Home" },
   { href: "/#solution", label: "Solutions" },
   { href: "/#tour", label: "Tour" },
-  { href: "/#ways", label: "Hosting" },
+  { href: "/#ways", label: "Product" },
   { href: "/#product", label: "Features" },
   { href: "/#services", label: "Services" },
   { href: "/#contact", label: "Contact" },

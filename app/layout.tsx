@@ -12,6 +12,7 @@ import {
   websiteJsonLd,
 } from "@/lib/seo";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const calistoga = Calistoga({ weight: "400", subsets: ["latin"], variable: "--font-calistoga" });

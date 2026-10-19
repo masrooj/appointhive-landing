@@ -96,7 +96,7 @@ function FooterIcon({ name }: { name: string }) {
 const productLinks = [
   { href: "/#solution", label: "Solutions", icon: "solutions" },
   { href: "/#tour", label: "Tour", icon: "features" },
-  { href: "/#ways", label: "Hosting", icon: "hosting" },
+  { href: "/#ways", label: "Product", icon: "hosting" },
   { href: "/#product", label: "Features", icon: "features" },
   { href: "/#services", label: "Services", icon: "services" },
   { href: "/#faq", label: "FAQ", icon: "faq" },
