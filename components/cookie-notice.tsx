@@ -22,9 +22,9 @@ export function CookieNotice() {
   return (
     <aside className="cookie" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-desc">
       <div className="cookie-copy">
-        <p id="cookie-title" className="cookie-title">
+        <strong id="cookie-title" className="cookie-title">
           Essential cookies only
-        </p>
+        </strong>
         <p id="cookie-desc">
           We use one first-party cookie to protect the contact form. We do not use advertising or
           third-party tracking cookies.{" "}
