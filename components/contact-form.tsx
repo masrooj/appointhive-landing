@@ -118,7 +118,7 @@ export function ContactForm() {
           </span>
         </label>
         {error ? <p className="form-error">{error}</p> : null}
-        <button className="btn btn-lime" type="submit" disabled={status === "sending"}>
+        <button className="btn btn-lime" type="submit" disabled={status === "sending"} aria-busy={status === "sending"}>
           {status === "sending" ? null : (
             <svg className="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
               <rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8" />

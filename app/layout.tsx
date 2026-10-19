@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Calistoga, Inter } from "next/font/google";
 import { CookieNotice } from "@/components/cookie-notice";
@@ -12,12 +12,19 @@ import {
   websiteJsonLd,
 } from "@/lib/seo";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const calistoga = Calistoga({ weight: "400", subsets: ["latin"], variable: "--font-calistoga" });
 
 export const metadata: Metadata = homeMetadata();
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#012f25",
+};
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
