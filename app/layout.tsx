@@ -42,6 +42,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <main id="main">{children}</main>
         <Footer />
         <CookieNotice />
+        <Analytics />
       </body>
     </html>
   );
