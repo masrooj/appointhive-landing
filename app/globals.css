@@ -959,6 +959,10 @@ textarea { min-height: 120px; resize: vertical; }
   border: 1px solid rgba(7, 203, 185, 0.35);
 }
 
+.form-success .btn {
+  margin-top: 0.75rem;
+}
+
 .site-footer {
   background: var(--forest-deep);
   border-top: 1px solid rgba(247, 226, 50, 0.28);

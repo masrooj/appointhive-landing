@@ -68,6 +68,17 @@ export function ContactForm() {
           Sent.
         </h2>
         <p>It’s on its way to hello@appointhive.com.</p>
+        <button
+          className="btn btn-ghost"
+          type="button"
+          onClick={() => {
+            setStatus("idle");
+            setError("");
+            setInterest("STANDALONE");
+          }}
+        >
+          Send another
+        </button>
       </div>
     );
   }
