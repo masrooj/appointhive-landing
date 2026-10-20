@@ -24,6 +24,9 @@ type IconName =
   | "booking"
   | "queue"
   | "payroll"
+  | "compare"
+  | "alternatives"
+  | "guides"
   | "contact"
   | "mail"
   | "instagram"
@@ -114,6 +117,26 @@ function FooterIcon({ name }: { name: IconName }) {
           <path {...stroke} d="M12 8.2v7.6M9.6 10.2c.5-1 1.4-1.5 2.4-1.5 1.5 0 2.5.9 2.5 2.1S13.5 13 12 13s-2.5.8-2.5 2.1c0 1.2 1 2.1 2.5 2.1 1 0 1.9-.5 2.4-1.5" />
         </>
       )}
+      {name === "compare" && (
+        <>
+          <rect {...stroke} x="3.5" y="5" width="7" height="14" rx="1.4" />
+          <rect {...stroke} x="13.5" y="5" width="7" height="14" rx="1.4" />
+          <path {...stroke} d="M5.5 9h3M5.5 12h3M15.5 9h3M15.5 12h3" />
+        </>
+      )}
+      {name === "alternatives" && (
+        <>
+          <path {...stroke} d="M7 7h10v10H7z" />
+          <path {...stroke} d="M10 4.5h10v10" />
+          <path {...stroke} d="M9.5 11.5h5M12 9v5" />
+        </>
+      )}
+      {name === "guides" && (
+        <>
+          <path {...stroke} d="M6 4.5h9.5L18.5 8v11.5H6z" />
+          <path {...stroke} d="M15 4.5V8h3.5M8.5 12h7M8.5 15.2h5" />
+        </>
+      )}
       {name === "contact" && (
         <path
           {...stroke}
@@ -189,9 +212,9 @@ const exploreLinks: { href: string; label: string; icon: IconName }[] = [
   { href: "/salon-booking-software", label: "Salon booking software", icon: "salon" },
   { href: "/barber-shop-software", label: "Barber shop software", icon: "barber" },
   { href: "/appointment-booking-software", label: "Appointment booking", icon: "appointment" },
-  { href: "/features/online-booking", label: "Online booking", icon: "booking" },
-  { href: "/features/live-queue", label: "Live queue", icon: "queue" },
-  { href: "/features/salon-payroll", label: "Salon payroll", icon: "payroll" },
+  { href: "/compare/appointhive-vs-fresha", label: "AppointHive vs Fresha", icon: "compare" },
+  { href: "/alternatives/fresha-alternative", label: "Fresha alternative", icon: "alternatives" },
+  { href: "/guides/barbershop-walk-in-queue", label: "Walk-in queue guide", icon: "guides" },
 ];
 
 const companyLinks: { href: string; label: string; icon: IconName; external?: boolean }[] = [

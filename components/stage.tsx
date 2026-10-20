@@ -137,35 +137,35 @@ const visitRecord = [
 const faqs = [
   {
     q: "Who is AppointHive for?",
-    a: "A smart way out of the booking mess in a barber shop or salon. The phone during a cut, the argument over who’s next, and the Sunday calculator come off the floor.",
+    a: "AppointHive is salon and barber shop software for shops that need online booking, a live floor queue, and staff pay from one visit. It takes the phone mid-cut, the who’s-next argument, and the Sunday calculator off the floor.",
   },
   {
     q: "Do clients need an account?",
-    a: "No. A client picks a time and gets the email. They never create a login.",
+    a: "No. On AppointHive, customers never create a login. They pick a time, get email confirmation, and show up.",
   },
   {
     q: "What is the difference between Standalone and Hosted?",
-    a: "The product is the same. Hosting is the only split. Standalone is one shop on servers you control, sold as a license or a quote. Hosted is the cloud we run, monthly or annual, with a 7-day trial. Cancel when you want. No card is taken when self-serve signup is open.",
+    a: "AppointHive is the same product either way; hosting is the only split. Standalone is a single-business license on servers you control. Hosted is the cloud we run—monthly or annual, with a 7-day trial—and you can cancel when you want. No card is taken when self-serve signup is open.",
   },
   {
     q: "What does one visit carry?",
-    a: "The booking, the staff member, the client history, the email, the reports, and the payroll. Those read the same visit. Nothing is copied into a second book.",
+    a: "In AppointHive, one visit record carries the booking, staff member, client history, email, reports, and payroll. Nothing is copied into a second book.",
   },
   {
     q: "How does the floor staff get in?",
-    a: "By PIN or magic link. There is no password for the chair to remember.",
+    a: "AppointHive floor staff get in by PIN or magic link. There is no password for the chair to remember.",
   },
   {
     q: "Does WhatsApp send with the email?",
-    a: "Email always sends. WhatsApp sends only after a Meta-approved number is in place.",
+    a: "On AppointHive, email confirmation and reminders always send. WhatsApp sends only after a Meta-approved number is in place.",
   },
   {
     q: "What is a service invoice?",
-    a: "The client’s bill for the visit. It is not a charge for using AppointHive.",
+    a: "A service invoice in AppointHive is the client’s bill for the visit. It is not a platform fee charged by AppointHive.",
   },
   {
     q: "How do we start?",
-    a: "Write to hello@appointhive.com and say how many chairs you run, and whether the software should live on your servers or on ours. A note starts a conversation. It does not buy a license or open a subscription.",
+    a: "Email hello@appointhive.com with how many chairs you run and whether AppointHive should live on your servers or on ours. A note starts a conversation; it does not buy a license or open a subscription.",
   },
 ];
 
@@ -200,11 +200,13 @@ export function Stage() {
               Appointment operations
           </p>
           <h1 className="display">
-            Schedule smarter.
+            AppointHive
+            <span>Schedule smarter.</span>
             <span>Operate better.</span>
           </h1>
           <p className="lede">
-              Run your chair, not your inbox. Booking, the live floor, and staff pay in one product.
+              Run your chair, not your inbox. Booking, the live floor, and staff pay in one product for
+              barber shops and salons.
           </p>
           <div className="hero-actions">
             <ContactLink />

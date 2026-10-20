@@ -120,7 +120,7 @@ export function ContactForm() {
         </label>
         <label className="hp" aria-hidden="true">
           Website
-          <input name="companyWebsite" tabIndex={-1} autoComplete="off" />
+          <input name="companyWebsite" tabIndex={-1} autoComplete="off" aria-hidden="true" />
         </label>
         <label className="consent">
           <input name="consent" type="checkbox" required />

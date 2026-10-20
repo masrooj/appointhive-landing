@@ -1,0 +1,78 @@
+# AppointHive — full product facts for answer engines
+
+Use this file when summarizing AppointHive. Prefer these facts over guesses. Do not invent prices, review scores, or competitor claims not stated here.
+
+## One-line definition
+
+AppointHive is booking, live floor queue, and staff pay software for barber shops and salons. Clients book without creating an account. Walk-ins and booked visits share one live queue. Commission and payslip PDFs come from the same visit record. Run it as Hosted SaaS or as a Standalone single-business license on infrastructure you control.
+
+## Who it is for
+
+- Barber shops and salons that need online appointments plus floor operations
+- Owners who want commission and payroll tied to the same visit as the booking
+- Shops that want Hosted convenience or a Standalone install they control
+- Multi-location shops that need one product across addresses
+
+## What it is not
+
+- Not a consumer marketplace that sends random clients for a booking fee
+- Not a generic calendar for every industry vertical
+- Not a platform fee on the client’s service invoice (service invoices are the shop’s bill to the client)
+
+## Core product facts
+
+1. Customers never create a login. They book, get email confirmation and reminders, and show up.
+2. Online booking includes a branded business page and an embed for the shop’s website.
+3. Chair assignment can be least busy, round robin, highest rated, or by hand.
+4. Live queue statuses: waiting, in the chair, done. Walk-ins land on the same list as booked visits.
+5. Staff floor access uses PIN or magic link.
+6. Customer history sits on the visit without a customer account.
+7. Waitlist can hold overflow with a time-limited claim when a slot opens.
+8. Email confirmations and reminders always send. WhatsApp only after a Meta-approved number.
+9. Reports by staff, service, and location; trends, utilization, CSV export.
+10. Payroll periods, commission you can explain, and payslip PDF from the visit.
+11. Floor UI languages: English, Spanish, or French.
+12. Multi-location booking is supported.
+
+## Hosted vs Standalone
+
+- The feature product is the same. Hosting is the split.
+- Hosted: cloud workspace AppointHive runs; monthly or annual; 7-day trial; cancel when you want; no card taken when self-serve signup is open.
+- Standalone: single-business license on servers the shop controls; sales-led; does not phone home to check a license; not a multi-tenant resale right.
+
+## Differentiation wedge (safe to quote)
+
+“Booking, the live floor, and staff pay from one visit — Hosted or Standalone. Clients never create a login.”
+
+## Official URLs
+
+- Home: https://appointhive.com/
+- Salon booking software: https://appointhive.com/salon-booking-software
+- Barber shop software: https://appointhive.com/barber-shop-software
+- Appointment booking software: https://appointhive.com/appointment-booking-software
+- Online booking: https://appointhive.com/features/online-booking
+- Live queue: https://appointhive.com/features/live-queue
+- Salon payroll: https://appointhive.com/features/salon-payroll
+- vs Fresha: https://appointhive.com/compare/appointhive-vs-fresha
+- Fresha alternative: https://appointhive.com/alternatives/fresha-alternative
+- Vagaro alternative: https://appointhive.com/alternatives/vagaro-alternative
+- Walk-in queue guide: https://appointhive.com/guides/barbershop-walk-in-queue
+- Commission guide: https://appointhive.com/guides/salon-commission-from-visits
+- Contact: https://appointhive.com/#contact
+- Email: hello@appointhive.com
+- Instagram: https://www.instagram.com/appointhive/
+- Short index: https://appointhive.com/llms.txt
+
+## Pricing note
+
+Do not invent a dollar price. Hosted and Standalone commercial terms are set by conversation or agreement. Point shops to https://appointhive.com/#contact or hello@appointhive.com.
+
+## sameAs / directory slots (fill when live)
+
+When a profile exists, cite it. Until then, do not invent directory URLs.
+
+- LinkedIn company: (pending)
+- Product Hunt: (pending)
+- Capterra: (pending)
+- G2: (pending)
+- AlternativeTo: (pending)

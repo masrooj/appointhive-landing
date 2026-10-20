@@ -18,7 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${origin}${page.path}`,
       lastModified: now,
       changeFrequency: "weekly" as const,
-      priority: page.path.startsWith("/features/") ? 0.75 : 0.9,
+      priority: page.path.startsWith("/features/")
+        ? 0.75
+        : page.path.startsWith("/guides/")
+          ? 0.8
+          : page.path.startsWith("/compare/") || page.path.startsWith("/alternatives/")
+            ? 0.85
+            : 0.9,
     })),
     ...legalNav.map((page) => ({
       url: `${origin}${page.href}`,

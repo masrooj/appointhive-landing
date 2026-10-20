@@ -86,6 +86,20 @@ export function homeMetadata(): Metadata {
   };
 }
 
+/**
+ * Public profile URLs for Organization.sameAs.
+ * Keep Instagram live. Uncomment (or append) directory/social URLs once each listing exists —
+ * see docs/seo-offsite-playbook.md § sameAs hooks.
+ */
+const ORGANIZATION_SAME_AS = [
+  "https://www.instagram.com/appointhive/",
+  // "https://www.linkedin.com/company/appointhive/",
+  // "https://www.producthunt.com/products/appointhive",
+  // "https://www.capterra.com/p/REPLACE/AppointHive/",
+  // "https://www.g2.com/products/appointhive/reviews",
+  // "https://alternativeto.net/software/appointhive/",
+];
+
 export function organizationJsonLd() {
   const origin = siteOrigin();
   return {
@@ -95,7 +109,7 @@ export function organizationJsonLd() {
     url: origin,
     logo: `${origin}/brand/logo.png`,
     email: "hello@appointhive.com",
-    sameAs: ["https://www.instagram.com/appointhive/"],
+    sameAs: ORGANIZATION_SAME_AS,
     description: brandDescription,
   };
 }
@@ -128,18 +142,22 @@ export function softwareApplicationJsonLd() {
       {
         "@type": "Offer",
         name: "Hosted SaaS",
-        description: "Cloud workspace we host. Monthly or annual subscription with trial.",
+        description:
+          "Cloud workspace we host. Monthly or annual subscription with a 7-day trial. Contact for current pricing.",
         url: `${origin}/#ways`,
         priceCurrency: "USD",
-        availability: "https://schema.org/OnlineOnly",
+        availability: "https://schema.org/InStock",
+        category: "SaaSSubscription",
       },
       {
         "@type": "Offer",
         name: "Standalone license",
-        description: "Single-business license on infrastructure you control.",
+        description:
+          "Single-business license on infrastructure you control. Sales-led quote. Contact for license terms.",
         url: `${origin}/#ways`,
         priceCurrency: "USD",
-        availability: "https://schema.org/OnlineOnly",
+        availability: "https://schema.org/InStock",
+        category: "SoftwareLicense",
       },
     ],
     featureList: [

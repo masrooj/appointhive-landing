@@ -1,5 +1,10 @@
 export type FaqItem = { question: string; answer: string };
 
+export type ComparisonTable = {
+  headers: string[];
+  rows: string[][];
+};
+
 export type IntentPage = {
   slug: string;
   path: string;
@@ -14,6 +19,7 @@ export type IntentPage = {
   bullets: string[];
   faqs: FaqItem[];
   related: { href: string; label: string }[];
+  comparison?: ComparisonTable;
 };
 
 export const brandDescription =
@@ -109,6 +115,8 @@ export const intentPages: IntentPage[] = [
       { href: "/appointment-booking-software", label: "Appointment booking software" },
       { href: "/features/online-booking", label: "Online booking" },
       { href: "/features/salon-payroll", label: "Salon payroll" },
+      { href: "/guides/salon-commission-from-visits", label: "Salon commission from visits" },
+      { href: "/alternatives/fresha-alternative", label: "Fresha alternative" },
     ],
   },
   {
@@ -189,6 +197,8 @@ export const intentPages: IntentPage[] = [
       { href: "/features/live-queue", label: "Live queue" },
       { href: "/appointment-booking-software", label: "Appointment booking software" },
       { href: "/features/online-booking", label: "Online booking" },
+      { href: "/guides/barbershop-walk-in-queue", label: "Barbershop walk-in queue" },
+      { href: "/compare/appointhive-vs-fresha", label: "AppointHive vs Fresha" },
     ],
   },
   {
@@ -269,6 +279,7 @@ export const intentPages: IntentPage[] = [
       { href: "/barber-shop-software", label: "Barber shop software" },
       { href: "/features/online-booking", label: "Online booking features" },
       { href: "/features/live-queue", label: "Live queue features" },
+      { href: "/alternatives/vagaro-alternative", label: "Vagaro alternative" },
     ],
   },
 ];
@@ -331,6 +342,7 @@ export const featurePages: IntentPage[] = [
       { href: "/salon-booking-software", label: "Salon booking software" },
       { href: "/features/live-queue", label: "Live queue" },
       { href: "/appointment-booking-software", label: "Appointment booking software" },
+      { href: "/alternatives/fresha-alternative", label: "Fresha alternative" },
     ],
   },
   {
@@ -390,6 +402,7 @@ export const featurePages: IntentPage[] = [
       { href: "/barber-shop-software", label: "Barber shop software" },
       { href: "/features/online-booking", label: "Online booking" },
       { href: "/features/salon-payroll", label: "Salon payroll" },
+      { href: "/guides/barbershop-walk-in-queue", label: "Barbershop walk-in queue" },
     ],
   },
   {
@@ -450,12 +463,398 @@ export const featurePages: IntentPage[] = [
       { href: "/salon-booking-software", label: "Salon booking software" },
       { href: "/features/online-booking", label: "Online booking" },
       { href: "/barber-shop-software", label: "Barber shop software" },
+      { href: "/guides/salon-commission-from-visits", label: "Salon commission from visits" },
+    ],
+  },
+];
+
+export const comparePages: IntentPage[] = [
+  {
+    slug: "appointhive-vs-fresha",
+    path: "/compare/appointhive-vs-fresha",
+    title: "AppointHive vs Fresha for salons and barber shops",
+    description:
+      "Compare AppointHive and Fresha for barber shops and salons: live walk-in queue, staff pay from the visit, client logins, and Hosted vs Standalone.",
+    kicker: "Compare",
+    h1: "AppointHive vs Fresha for the floor that books and pays.",
+    definition:
+      "AppointHive is salon and barber shop software that connects online booking, a live walk-in queue, and staff pay on one visit record—available as Hosted SaaS or a Standalone license. Fresha is a widely used marketplace-style booking platform for beauty businesses. This page compares how shops that care about queue, payroll, client logins, and install options may choose.",
+    lede: "Pick the stack that matches how your chairs actually run—not only how clients find a time slot.",
+    image: {
+      src: "/film/hero-devices.jpg",
+      alt: "Laptop and phone on a barber counter showing AppointHive booking and dashboard",
+    },
+    comparison: {
+      headers: ["Capability", "AppointHive", "Fresha (typical public positioning)"],
+      rows: [
+        ["Online booking", "Branded page + website embed", "Online booking + marketplace discovery"],
+        ["Client account", "Customers never create a login", "Client accounts / app common for marketplace"],
+        ["Walk-in + booked queue", "One live queue for both", "Strong booking; queue depth varies by setup"],
+        ["Staff pay from the visit", "Commission + payslip PDF on same visit", "Business tools; payroll depth varies by plan"],
+        ["Hosting choice", "Hosted SaaS or Standalone license", "Cloud / marketplace-hosted model"],
+        ["Best fit signal", "Floor ops + pay tied to booking", "Discovery + booking-led beauty shops"],
+      ],
+    },
+    sections: [
+      {
+        heading: "What this comparison is (and is not)",
+        body: [
+          "Feature grids change. We describe AppointHive from our product and Fresha from how it is commonly marketed to salons and barbers—not from a paid partnership or scraped private admin screens.",
+          "If your shop needs marketplace discovery above all, Fresha’s reach may matter more. If you need booking, walk-ins, and commission from one visit—and optionally software on your own servers—AppointHive is built for that wedge.",
+        ],
+      },
+      {
+        heading: "Where AppointHive is built to win",
+        body: [
+          "One visit record feeds confirmation email, live queue status, reports, and payslip PDF. Walk-ins land on the same list as booked cuts.",
+          "Clients book without creating an account. You can run Hosted cloud or a Standalone single-business install that does not phone home for license checks.",
+        ],
+      },
+      {
+        heading: "When Fresha may still be the better fit",
+        body: [
+          "Shops that prioritize consumer marketplace visibility and a large beauty ecosystem may prefer Fresha’s discovery model.",
+          "Always verify current Fresha plans, fees, and floor features against your chairs before you switch—public marketing is not a contract.",
+        ],
+      },
+    ],
+    bullets: [
+      "Honest capability table, not fake star scores",
+      "AppointHive: queue + pay on the visit",
+      "No client login on AppointHive",
+      "Hosted or Standalone on AppointHive",
+      "Fresha: strong marketplace-led booking",
+      "Contact us to map your chairs",
+    ],
+    faqs: [
+      {
+        question: "Is AppointHive a Fresha competitor?",
+        answer:
+          "Yes for shops comparing salon and barber booking tools. AppointHive focuses on booking plus live queue and staff pay from one visit, with Hosted or Standalone options—not on running a consumer marketplace.",
+      },
+      {
+        question: "Does AppointHive replace Fresha’s marketplace?",
+        answer:
+          "No. AppointHive does not claim Fresha-scale marketplace discovery. It replaces the shop’s booking, floor queue, and pay workflow when that is the pain.",
+      },
+      {
+        question: "Can clients book AppointHive without an app login?",
+        answer:
+          "Yes. On AppointHive, customers never create a login. They book on your page or embed and get email confirmation.",
+      },
+      {
+        question: "Can I run AppointHive on my own servers?",
+        answer:
+          "Yes. Standalone is a single-business license on infrastructure you control. Hosted is the same product on cloud we run.",
+      },
+      {
+        question: "How current is this AppointHive vs Fresha page?",
+        answer:
+          "It reflects AppointHive’s product and Fresha’s typical public positioning. Re-check competitor plans before you buy; email hello@appointhive.com if a row looks wrong for your use case.",
+      },
+    ],
+    related: [
+      { href: "/alternatives/fresha-alternative", label: "Fresha alternative" },
+      { href: "/alternatives/vagaro-alternative", label: "Vagaro alternative" },
+      { href: "/barber-shop-software", label: "Barber shop software" },
+      { href: "/features/live-queue", label: "Live queue" },
+      { href: "/features/salon-payroll", label: "Salon payroll" },
+    ],
+  },
+];
+
+export const alternativePages: IntentPage[] = [
+  {
+    slug: "fresha-alternative",
+    path: "/alternatives/fresha-alternative",
+    title: "Fresha alternative for salons and barber shops",
+    description:
+      "Looking for a Fresha alternative? AppointHive pairs online booking with a live walk-in queue and staff pay from the same visit—Hosted or Standalone.",
+    kicker: "Alternative",
+    h1: "A Fresha alternative built for queue and pay.",
+    definition:
+      "AppointHive is a Fresha alternative for barber shops and salons that want online booking without forcing client logins, a live queue for walk-ins and appointments, and commission from the same visit—plus the choice of Hosted SaaS or a Standalone license.",
+    lede: "Keep the chairs moving. Keep pay honest. Skip the marketplace if that is not your growth channel.",
+    image: {
+      src: "/film/solve-queue.jpg",
+      alt: "Two barbers checking the same live queue on a phone",
+    },
+    sections: [
+      {
+        heading: "Why shops look past marketplace-first tools",
+        body: [
+          "Marketplace booking helps discovery. Many floors still need one shared answer for who’s next, and a payslip that matches the cut that happened.",
+          "AppointHive treats the booking as the start of a visit: queue status, history, email, reports, and payroll read the same record.",
+        ],
+      },
+      {
+        heading: "What you get instead",
+        body: [
+          "Branded online booking and website embed. Walk-ins on the same live list. Staff PIN or magic link on the floor. English, Spanish, or French.",
+          "Hosted trial when you want cloud. Standalone when the shop should live on servers you control.",
+        ],
+      },
+    ],
+    bullets: [
+      "No customer login",
+      "Live queue for bookings and walk-ins",
+      "Commission and payslip from the visit",
+      "Hosted or Standalone",
+      "Multi-location ready",
+      "Email confirmations and reminders",
+    ],
+    faqs: [
+      {
+        question: "What is a good Fresha alternative for a barber shop?",
+        answer:
+          "A good Fresha alternative depends on whether you need marketplace traffic or floor operations. AppointHive is built for booking, live walk-in queue, and staff pay from one visit—with Hosted or Standalone hosting.",
+      },
+      {
+        question: "Does AppointHive include a client marketplace?",
+        answer:
+          "No. AppointHive focuses on your shop’s booking page, embed, queue, and payroll—not a consumer marketplace that sends strangers for a booking fee.",
+      },
+      {
+        question: "Will my clients need a new app?",
+        answer:
+          "No. Clients book on the web with AppointHive and never create a login.",
+      },
+      {
+        question: "Can I switch from Fresha without losing the floor?",
+        answer:
+          "You can run AppointHive for booking and queue while you migrate habits. Contact hello@appointhive.com with chair count and whether you want Hosted or Standalone.",
+      },
+    ],
+    related: [
+      { href: "/compare/appointhive-vs-fresha", label: "AppointHive vs Fresha" },
+      { href: "/alternatives/vagaro-alternative", label: "Vagaro alternative" },
+      { href: "/salon-booking-software", label: "Salon booking software" },
+      { href: "/features/live-queue", label: "Live queue" },
+    ],
+  },
+  {
+    slug: "vagaro-alternative",
+    path: "/alternatives/vagaro-alternative",
+    title: "Vagaro alternative for salons and barber shops",
+    description:
+      "AppointHive is a Vagaro alternative focused on online booking, a live walk-in queue, and salon payroll from the same visit—Hosted SaaS or Standalone.",
+    kicker: "Alternative",
+    h1: "A Vagaro alternative when the visit must pay the chair.",
+    definition:
+      "AppointHive is a Vagaro alternative for salons and barber shops that want self-serve booking, one live queue for walk-ins and appointments, and staff commission from the same visit record. Choose Hosted cloud or a Standalone single-business license.",
+    lede: "All-in-one suites are wide. AppointHive is deep on the visit from book to payslip.",
+    image: {
+      src: "/film/solve-payroll.jpg",
+      alt: "An owner at closing reviewing the day’s numbers on a tablet",
+    },
+    sections: [
+      {
+        heading: "When an all-in-one still feels split",
+        body: [
+          "Broad salon platforms cover many modules. Shops still struggle when walk-ins live in one place and commission lives in a spreadsheet.",
+          "AppointHive keeps booking, floor status, and pay on one visit so Sunday is not a calculator session.",
+        ],
+      },
+      {
+        heading: "Fit signals for AppointHive",
+        body: [
+          "You care that clients never create a login. You need walk-ins on the same list as bookings. You want payslip PDFs from the cut that happened.",
+          "You may also want Standalone—software on your servers—rather than only a subscription cloud.",
+        ],
+      },
+    ],
+    bullets: [
+      "Online booking + embed",
+      "Live queue and walk-ins",
+      "Payroll and commission from the visit",
+      "No customer accounts",
+      "Hosted or Standalone",
+      "Reports and CSV export",
+    ],
+    faqs: [
+      {
+        question: "Is AppointHive a Vagaro alternative?",
+        answer:
+          "Yes for shops comparing salon and barber booking platforms. AppointHive emphasizes booking plus live queue and staff pay from one visit, with Hosted or Standalone options.",
+      },
+      {
+        question: "Does AppointHive include POS and retail inventory?",
+        answer:
+          "AppointHive focuses on appointment operations—booking, floor queue, and earn/payroll from visits. If you need a full retail POS suite, confirm that requirement before you switch.",
+      },
+      {
+        question: "Can I embed booking on my website?",
+        answer:
+          "Yes. AppointHive online booking includes an embed for your site and a branded business page.",
+      },
+      {
+        question: "How do I evaluate AppointHive against Vagaro?",
+        answer:
+          "List must-haves: walk-in queue, client login policy, payroll depth, and Hosted vs on-prem. Then write hello@appointhive.com with chair count and product interest.",
+      },
+    ],
+    related: [
+      { href: "/compare/appointhive-vs-fresha", label: "AppointHive vs Fresha" },
+      { href: "/alternatives/fresha-alternative", label: "Fresha alternative" },
+      { href: "/appointment-booking-software", label: "Appointment booking software" },
+      { href: "/features/salon-payroll", label: "Salon payroll" },
+    ],
+  },
+];
+
+export const guidePages: IntentPage[] = [
+  {
+    slug: "barbershop-walk-in-queue",
+    path: "/guides/barbershop-walk-in-queue",
+    title: "Barbershop walk-in queue: bookings and walk-ins on one list",
+    description:
+      "How a barbershop walk-in queue should work with online bookings. AppointHive keeps waiting, in the chair, and done on one live list.",
+    kicker: "Guide",
+    h1: "Barbershop walk-in queue that matches the chairs.",
+    definition:
+      "A barbershop walk-in queue is a shared live list of who is waiting, in the chair, and done—including walk-ins and clients who booked online. AppointHive runs that queue on the same visit record as the booking so the floor has one answer for who’s next.",
+    lede: "Three people on the bench. Two chairs. One list.",
+    image: {
+      src: "/film/floor.jpg",
+      alt: "A real barbershop floor with chairs and someone waiting",
+    },
+    sections: [
+      {
+        heading: "Why paper and separate apps fail",
+        body: [
+          "When bookings live in one app and walk-ins live on a sticky note, staff argue mid-cut. The person who booked online feels skipped; the walk-in feels invisible.",
+          "A live queue only works if both arrival types share statuses: waiting, in the chair, done.",
+        ],
+      },
+      {
+        heading: "How AppointHive runs the floor",
+        body: [
+          "Booked visits appear on the queue. Walk-ins are added to the same list. Staff open the floor with PIN or magic link.",
+          "A waitlist can hold overflow with a time-limited claim when a chair frees. Customer history stays on the visit without a customer login.",
+        ],
+      },
+      {
+        heading: "Tied to pay, not only to order",
+        body: [
+          "The queue is not a separate sticky-note product. It reads the visit that later feeds reports and commission—so the cut that happened is the cut that pays.",
+        ],
+      },
+    ],
+    bullets: [
+      "Waiting / in chair / done",
+      "Walk-ins beside bookings",
+      "Staff PIN or magic link",
+      "Waitlist with timed claim",
+      "No customer login",
+      "Same visit feeds payroll",
+    ],
+    faqs: [
+      {
+        question: "What is a barbershop walk-in queue?",
+        answer:
+          "A barbershop walk-in queue is a shared live list of who is waiting, in service, and done. In AppointHive, walk-ins and online bookings share that same list.",
+      },
+      {
+        question: "Can walk-ins join without booking online?",
+        answer:
+          "Yes. AppointHive adds walk-ins to the live queue alongside appointments.",
+      },
+      {
+        question: "Do barbers need phones to manage the queue?",
+        answer:
+          "Staff can use the AppointHive floor on phone or desk with PIN or magic link—without wrestling a full password mid-cut.",
+      },
+      {
+        question: "How does the queue connect to payroll?",
+        answer:
+          "AppointHive uses one visit record for queue status and later for reports, commission, and payslip PDF.",
+      },
+    ],
+    related: [
+      { href: "/features/live-queue", label: "Live queue feature" },
+      { href: "/barber-shop-software", label: "Barber shop software" },
+      { href: "/guides/salon-commission-from-visits", label: "Salon commission from visits" },
+      { href: "/compare/appointhive-vs-fresha", label: "AppointHive vs Fresha" },
+    ],
+  },
+  {
+    slug: "salon-commission-from-visits",
+    path: "/guides/salon-commission-from-visits",
+    title: "Salon commission from visits: pay without the Sunday calculator",
+    description:
+      "How salon commission should come from the same visit as the booking. AppointHive builds payslip PDFs from that visit record.",
+    kicker: "Guide",
+    h1: "Salon commission from the visit that happened.",
+    definition:
+      "Salon commission from visits means staff pay is calculated from the same appointment or walk-in record that ran on the floor—not from a separate spreadsheet rebuilt on Sunday. AppointHive ties commission, revenue reports, and payslip PDFs to that visit.",
+    lede: "Commission you can explain. A payslip from the same cut.",
+    image: {
+      src: "/film/solve-payroll.jpg",
+      alt: "An owner at closing reviewing the day’s numbers on a tablet",
+    },
+    sections: [
+      {
+        heading: "Why spreadsheets drift",
+        body: [
+          "When booking lives in one tool and pay lives in another, tips, add-ons, and no-shows become arguments. The floor finished; the numbers did not.",
+          "One visit record keeps staff, service, location, and status aligned from book through done.",
+        ],
+      },
+      {
+        heading: "What AppointHive’s Earn side does",
+        body: [
+          "Reports by staff, service, and location. Payroll periods and a payslip PDF. CSV export when you need the numbers elsewhere.",
+          "Service invoices are the client’s bill for the visit—not a platform fee charged by AppointHive.",
+        ],
+      },
+      {
+        heading: "Start from booking, finish at lock-up",
+        body: [
+          "Online booking and the live queue write the visit. At close, commission is ready because pay reads the same record—Hosted or Standalone.",
+        ],
+      },
+    ],
+    bullets: [
+      "Commission from the visit",
+      "Payslip PDF",
+      "Payroll periods",
+      "Staff and service reports",
+      "CSV export",
+      "Works with booking and queue",
+    ],
+    faqs: [
+      {
+        question: "How should salon commission from visits work?",
+        answer:
+          "Salon commission from visits should use the same visit record as the booking and floor status. AppointHive builds commission and payslip PDFs from that record.",
+      },
+      {
+        question: "Does AppointHive include salon payroll software?",
+        answer:
+          "Yes. Commission, payroll periods, and payslip PDFs are part of AppointHive’s Earn side, fed by the same visits as booking.",
+      },
+      {
+        question: "Can I export payroll numbers?",
+        answer:
+          "Yes. AppointHive includes reports in the product and CSV export when you need the numbers elsewhere.",
+      },
+      {
+        question: "Are service invoices a fee to use AppointHive?",
+        answer:
+          "No. Service invoices are bills for your clients. They are not a platform fee charged by AppointHive.",
+      },
+    ],
+    related: [
+      { href: "/features/salon-payroll", label: "Salon payroll feature" },
+      { href: "/salon-booking-software", label: "Salon booking software" },
+      { href: "/guides/barbershop-walk-in-queue", label: "Barbershop walk-in queue" },
+      { href: "/alternatives/vagaro-alternative", label: "Vagaro alternative" },
     ],
   },
 ];
 
 export function allSeoPages(): IntentPage[] {
-  return [...intentPages, ...featurePages];
+  return [...intentPages, ...featurePages, ...comparePages, ...alternativePages, ...guidePages];
 }
 
 export function getIntentPage(slug: string): IntentPage | undefined {
@@ -464,4 +863,16 @@ export function getIntentPage(slug: string): IntentPage | undefined {
 
 export function getFeaturePage(slug: string): IntentPage | undefined {
   return featurePages.find((page) => page.slug === slug);
+}
+
+export function getComparePage(slug: string): IntentPage | undefined {
+  return comparePages.find((page) => page.slug === slug);
+}
+
+export function getAlternativePage(slug: string): IntentPage | undefined {
+  return alternativePages.find((page) => page.slug === slug);
+}
+
+export function getGuidePage(slug: string): IntentPage | undefined {
+  return guidePages.find((page) => page.slug === slug);
 }

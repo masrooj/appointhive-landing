@@ -103,8 +103,9 @@ export async function POST(request: Request) {
   if (!csrfMatches(request)) {
     return json({ error: "Invalid request." }, 403);
   }
-  if (limited(clientKey(request))) {
-    return json({ error: "Too many notes. Email hello@appointhive.com." }, 429);
+  // Fail closed on mail config before burning rate-limit budget.
+  if (!smtpReady()) {
+    return json({ error: "Mail is not configured yet. Email hello@appointhive.com directly." }, 503);
   }
 
   let raw: string;
@@ -148,8 +149,8 @@ export async function POST(request: Request) {
     return json({ error: "Please accept the privacy note." }, 400);
   }
 
-  if (!smtpReady()) {
-    return json({ error: "Mail is not configured yet. Email hello@appointhive.com directly." }, 503);
+  if (limited(clientKey(request))) {
+    return json({ error: "Too many notes. Email hello@appointhive.com." }, 429);
   }
 
   try {

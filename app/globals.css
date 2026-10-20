@@ -490,7 +490,7 @@ a { color: inherit; text-underline-offset: 0.18em; }
   margin: 0.55rem 0 0;
   color: white;
   font-size: clamp(2.35rem, 8.2vw, 5.6rem);
-  max-width: 12ch;
+  max-width: 14ch;
 }
 
 .stage h1 span {
@@ -1551,6 +1551,75 @@ textarea { min-height: 120px; resize: vertical; }
   background: var(--gold);
 }
 
+.intent-comparison {
+  margin-top: 2.6rem;
+  max-width: 54rem;
+}
+
+.intent-comparison h2 {
+  margin: 0 0 1rem;
+  color: white;
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+}
+
+.intent-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(7, 203, 185, 0.28);
+  border-radius: 14px;
+  background: rgba(1, 31, 24, 0.55);
+}
+
+.intent-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--mist);
+}
+
+.intent-table th,
+.intent-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(180, 201, 188, 0.16);
+}
+
+.intent-table thead th {
+  font-family: var(--font-calistoga), Georgia, serif;
+  font-weight: 400;
+  font-size: 1.02rem;
+  background: rgba(7, 203, 185, 0.12);
+  color: var(--gold);
+}
+
+.intent-table tbody th {
+  font-weight: 600;
+  color: var(--mist);
+  white-space: nowrap;
+}
+
+.intent-table tbody td {
+  color: var(--mist-dim);
+}
+
+.intent-table tbody tr:last-child th,
+.intent-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 640px) {
+  .intent-table th,
+  .intent-table td {
+    padding: 0.7rem 0.75rem;
+    font-size: 0.88rem;
+  }
+
+  .intent-table tbody th {
+    white-space: normal;
+  }
+}
+
 .intent-section {
   margin-top: 2.4rem;
   max-width: 54rem;
@@ -1800,7 +1869,7 @@ textarea { min-height: 120px; resize: vertical; }
       linear-gradient(180deg, rgba(1, 14, 11, 0.42) 0%, rgba(1, 18, 14, 0.78) 38%, rgba(1, 18, 14, 0.94) 100%);
   }
 
-  .stage h1 { max-width: 13ch; }
+  .stage h1 { max-width: 14ch; }
   .reel img { height: 168px; border-radius: 18px; }
   .reel figcaption { font-size: 1.15rem; left: 0.75rem; bottom: 0.7rem; }
 

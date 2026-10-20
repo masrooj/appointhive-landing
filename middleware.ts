@@ -6,13 +6,23 @@ function contentSecurityPolicy(nonce: string): string {
   const scriptSrc = ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'"];
   if (dev) scriptSrc.push("'unsafe-eval'");
 
+  // Vercel Analytics / Insights (same-origin /_vercel/insights plus hosted endpoints).
+  const connectSrc = [
+    "'self'",
+    "https://vitals.vercel-insights.com",
+    "https://va.vercel-insights.com",
+  ];
+  if (!dev) {
+    scriptSrc.push("https://va.vercel-scripts.com");
+  }
+
   return [
     "default-src 'self'",
     `script-src ${scriptSrc.join(" ")}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' blob: data:",
     "font-src 'self'",
-    "connect-src 'self'",
+    `connect-src ${connectSrc.join(" ")}`,
     "media-src 'self'",
     "object-src 'none'",
     "base-uri 'self'",

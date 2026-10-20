@@ -55,6 +55,42 @@ export function IntentPageView({ page, crumbs }: Props) {
           ))}
         </ul>
 
+        {page.comparison ? (
+          <section className="intent-comparison" aria-labelledby="comparison-heading">
+            <h2 className="display" id="comparison-heading">
+              Side by side
+            </h2>
+            <div className="intent-table-wrap">
+              <table className="intent-table">
+                <thead>
+                  <tr>
+                    {page.comparison.headers.map((header) => (
+                      <th key={header} scope="col">
+                        {header}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {page.comparison.rows.map((row) => (
+                    <tr key={row[0]}>
+                      {row.map((cell, index) =>
+                        index === 0 ? (
+                          <th key={cell} scope="row">
+                            {cell}
+                          </th>
+                        ) : (
+                          <td key={`${row[0]}-${index}`}>{cell}</td>
+                        ),
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ) : null}
+
         {page.sections.map((section) => (
           <section key={section.heading} className="intent-section">
             <h2 className="display">{section.heading}</h2>

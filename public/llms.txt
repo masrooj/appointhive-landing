@@ -17,22 +17,43 @@ AppointHive is salon and barber shop software. Clients book online without creat
 - Live queue: https://appointhive.com/features/live-queue
 - Salon payroll: https://appointhive.com/features/salon-payroll
 
+## Compare and alternatives
+
+- AppointHive vs Fresha: https://appointhive.com/compare/appointhive-vs-fresha
+- Fresha alternative: https://appointhive.com/alternatives/fresha-alternative
+- Vagaro alternative: https://appointhive.com/alternatives/vagaro-alternative
+
+## Guides
+
+- Barbershop walk-in queue: https://appointhive.com/guides/barbershop-walk-in-queue
+- Salon commission from visits: https://appointhive.com/guides/salon-commission-from-visits
+
 ## Contact
 
 - Email: hello@appointhive.com
 - Contact form: https://appointhive.com/#contact
 - Instagram: https://www.instagram.com/appointhive/
+- Full facts for models: https://appointhive.com/llms-full.txt
 
 ## Product facts
 
 - Customers never create a login
 - Multi-location booking supported
 - Floor languages: English, Spanish, French
-- Hosted: cloud subscription with trial
+- Hosted: cloud subscription with 7-day trial
 - Standalone: single-business license, does not phone home for license checks
 - WhatsApp messaging only after a Meta-approved number
+- Booking, live queue, and staff pay share one visit record
 
 ## Optional
 
 - Full product overview: https://appointhive.com/#product
 - Legal: https://appointhive.com/legal/privacy
+
+## Directory profiles (add when live)
+
+- LinkedIn: (paste company URL)
+- Product Hunt: (paste product URL)
+- Capterra: (paste listing URL)
+- G2: (paste product URL)
+- AlternativeTo: (paste software URL)
