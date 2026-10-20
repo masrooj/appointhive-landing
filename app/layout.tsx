@@ -30,8 +30,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const nonce = (await headers()).get("x-nonce") ?? undefined;
 
   return (
-    <html lang="en" className={`${inter.variable} ${calistoga.variable}`}>
-      <body data-nonce={nonce}>
+    <html lang="en" className={`${inter.variable} ${calistoga.variable}`} suppressHydrationWarning>
+      <body data-nonce={nonce} suppressHydrationWarning>
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={softwareApplicationJsonLd()} />
