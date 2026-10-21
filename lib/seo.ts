@@ -45,6 +45,13 @@ export function pageMetadata(input: {
   };
 }
 
+/** Public GSC token (also published as DNS TXT). Override via env if rotated. */
+const GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() ||
+  "52pkoc9Dx1vBt1ATjLuaw5-FGQdl4amJi6bEXZzah9A";
+
+const BING_SITE_VERIFICATION = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION?.trim();
+
 export function homeMetadata(): Metadata {
   return {
     metadataBase: new URL(siteOrigin()),
@@ -61,6 +68,12 @@ export function homeMetadata(): Metadata {
     category: "business software",
     alternates: { canonical: siteOrigin() },
     robots: { index: true, follow: true },
+    verification: {
+      google: GOOGLE_SITE_VERIFICATION,
+      ...(BING_SITE_VERIFICATION
+        ? { other: { "msvalidate.01": BING_SITE_VERIFICATION } }
+        : {}),
+    },
     openGraph: {
       title: DEFAULT_TITLE,
       description: brandDescription,

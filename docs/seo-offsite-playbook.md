@@ -10,22 +10,39 @@ Canonical facts live in:
 
 ---
 
+## Status board (update as you go)
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Live deploy + SEO URLs 200 | Done | Spot-checked Oct 2026 |
+| Sitemap / robots / llms live | Done | |
+| Contact SMTP on production | Done | Form API returns ok with CSRF |
+| Google DNS TXT | Done | `google-site-verification=52pkoc9…` live |
+| Google HTML meta fallback | Code ready | Ships in `homeMetadata` after next deploy |
+| GSC property verified | **You** | Click Verify, then submit sitemap |
+| Bing Webmaster + sitemap | **You** | |
+| IndexNow key hosted | Code ready | `/{key}.txt` + `npm run seo:indexnow` after deploy |
+| Directories / sameAs URLs | Open | LinkedIn, PH, Capterra, G2 |
+| Case studies / reviews | Open | Month 2+ |
+
+---
+
 ## Week 0 — Prerequisites (same day as deploy)
 
-- [ ] Confirm production origin is `https://appointhive.com`
-- [ ] Confirm env `NEXT_PUBLIC_SITE_URL=https://appointhive.com`
-- [ ] Open and verify 200:
+- [x] Confirm production origin is `https://appointhive.com`
+- [x] Confirm env `NEXT_PUBLIC_SITE_URL=https://appointhive.com` (canonicals resolve to production)
+- [x] Open and verify 200:
   - https://appointhive.com/sitemap.xml
   - https://appointhive.com/robots.txt
   - https://appointhive.com/llms.txt
   - https://appointhive.com/llms-full.txt
-- [ ] Spot-check new URLs (status 200, canonical, FAQ visible):
+- [x] Spot-check new URLs (status 200, canonical, FAQ visible):
   - `/compare/appointhive-vs-fresha`
   - `/alternatives/fresha-alternative`
   - `/alternatives/vagaro-alternative`
   - `/guides/barbershop-walk-in-queue`
   - `/guides/salon-commission-from-visits`
-- [ ] View page source on home + one intent page: Organization / SoftwareApplication / FAQ JSON-LD present
+- [x] View page source on home + one intent page: Organization / SoftwareApplication / FAQ JSON-LD present
 
 ---
 
@@ -33,8 +50,10 @@ Canonical facts live in:
 
 ### Google Search Console
 
-1. Add property `https://appointhive.com` (URL-prefix or Domain).
-2. Verify: prefer DNS TXT if you control DNS; else HTML meta / file upload.
+1. Add property `appointhive.com` (Domain) or `https://appointhive.com` (URL-prefix).
+2. Verify:
+   - **DNS TXT** is already published — click **Verify** again.
+   - Backup: HTML meta ships in site metadata after deploy (`google-site-verification`).
 3. Sitemaps → submit `https://appointhive.com/sitemap.xml`.
 4. URL Inspection → Request indexing for:
    - `/`
@@ -48,7 +67,12 @@ Canonical facts live in:
 
 1. Import from Google Search Console, or verify the site separately.
 2. Submit the same sitemap.
-3. Optional: enable IndexNow if Bing offers it for your property (speeds Bing/Copilot discovery).
+3. After deploy, run IndexNow from a machine with network:
+   ```bash
+   npm run seo:indexnow
+   ```
+   Key file: `https://appointhive.com/3386fadba40c2063b0020f1b2051b75a.txt`
+4. Optional: set `NEXT_PUBLIC_BING_SITE_VERIFICATION` from Bing’s HTML meta tag, redeploy.
 
 ### Analytics
 
@@ -206,15 +230,12 @@ Replace `(pending)` with live URLs so answer engines can cite them.
 
 ---
 
-## IndexNow (optional Week 1 add-on)
+## IndexNow (Week 1 add-on — implemented)
 
-If you want faster Bing discovery after deploys:
-
-1. Generate an IndexNow key in Bing Webmaster.
-2. Host the key file at `https://appointhive.com/<key>.txt` (or follow Bing’s current instructions).
-3. Ping IndexNow when major SEO URLs change.
-
-Not required for Google.
+- Key: `3386fadba40c2063b0020f1b2051b75a`
+- Public file: `/3386fadba40c2063b0020f1b2051b75a.txt`
+- After each SEO deploy: `npm run seo:indexnow`
+- Not required for Google; helps Bing / Copilot surfaces.
 
 ---
 
